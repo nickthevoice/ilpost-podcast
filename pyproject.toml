@@ -1,0 +1,11 @@
+[project]
+name = "ilpost-podcast"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10.16"
+dependencies = [
+    "beautifulsoup4>=4.13.3",
+    "feedgen>=1.0.0",
+    "requests>=2.32.3",
+]
