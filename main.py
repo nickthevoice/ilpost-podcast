@@ -12,7 +12,8 @@ def main() -> None:
         "https://www.ilpost.it/podcasts/altre-indagini"
     ]
     for url in urls:
-        podgen(url, f"temp/{url.split('/')[-1]}.xml")
+        name = url.split('/')[-1]
+        podgen(url, f"temp/{name}.xml")
 
 if __name__ == "__main__":
     main()
