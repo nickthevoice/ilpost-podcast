@@ -5,4 +5,4 @@ services:
     volumes:
       - /home/ambrogio/Docker/ilpost-podcast:/app
       - /app/.venv
-      - /home/ambrogio/Docker/apache/htdocs:/app/ilpost
+      - /home/ambrogio/Docker/apache/htdocs/ilpost:/app/ilpost
