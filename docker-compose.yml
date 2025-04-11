@@ -1,0 +1,8 @@
+services:
+  app:
+    image: ilpost-podcast:latest
+    container_name: ilpost-podcast
+    volumes:
+      - /home/ambrogio/Docker/ilpost-podcast:/app
+      - /app/.venv
+      - /home/ambrogio/Docker/apache/htdocs:/app/ilpost
