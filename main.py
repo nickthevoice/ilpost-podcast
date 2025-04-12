@@ -13,7 +13,7 @@ def main() -> None:
     ]
     for url in urls:
         name = url.split('/')[-1]
-        podgen(url, f"ilpost/{name}.xml")
+        podgen(url, f"/app/ilpost/{name}.xml")
 
 if __name__ == "__main__":
     main()
