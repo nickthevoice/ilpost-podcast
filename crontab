@@ -1,1 +1,1 @@
-5 6 * * * /app/.venv/bin/python /app/main.py >> /var/log/cron.log 2>&1
+* * * * * cd /app && python main.py >> /var/log/cron.log 2>&1

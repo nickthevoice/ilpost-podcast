@@ -20,3 +20,14 @@ def get_data(url: str) -> dict:
     data = json.loads(raw)
     data["props"]["pageProps"]["data"]["data"]["podcast"]["data"]["podcastUrl"] = url
     return data
+
+def main() -> None:
+    from datetime import datetime
+    data = get_data("https://www.ilpost.it/podcasts/morning/")
+    # print(json.dumps(data, indent=4))
+    episodes = data["props"]["pageProps"]["data"]["data"]["episodes"]["data"]
+    for e in episodes:
+        print(datetime.fromtimestamp(e["timestamp"]))
+
+if __name__ == "__main__":
+    main()

@@ -2,6 +2,14 @@ from feedgen.feed import FeedGenerator, FeedEntry
 from datetime import datetime
 import json
 from src.fetch import get_data
+import logging
+
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
 
 def get_file(filepath: str) -> str:
     with open(filepath, "r") as f:
@@ -47,7 +55,7 @@ def generate_podcast(data: dict, filepath: str) -> None:
 def podgen(url: str, filepath: str) -> None:
     data = get_data(url)
     generate_podcast(data, filepath)
-    print(f"Podcast generated! Saved at {filepath}")
+    logging.info(f"Podcast generated! Saved at {filepath}")
 
 def main() -> None:
     podgen(url="https://www.ilpost.it/podcasts/ascolta/", filepath="temp/ascolta.xml")

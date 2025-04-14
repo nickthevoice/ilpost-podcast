@@ -49,7 +49,14 @@ ENV PATH="/app/.venv/bin:$PATH"
 WORKDIR /app
 
 # Add cron configuration
-COPY crontab /etc/cron.d/my-cron-job
+COPY crontab /etc/cron.d/cron-job
+
+# Create cron configuration with environment variables first
+RUN echo "SHELL=/bin/bash\n\
+PATH=/app/.venv/bin:$PATH\n\
+WORKDIR=/app\n\
+\n\
+$(cat /etc/cron.d/cron-job)" > /etc/cron.d/my-cron-job
 
 # Set up logging
 RUN touch /var/log/cron.log && \

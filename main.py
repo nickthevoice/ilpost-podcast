@@ -2,6 +2,7 @@ from src.feeder import podgen
 
 
 def main() -> None:
+    print("\n--- Welcome to IlPost Podcast ---")
     urls = [
         "https://www.ilpost.it/podcasts/morning",
         "https://www.ilpost.it/podcasts/globo",
@@ -13,7 +14,7 @@ def main() -> None:
     ]
     for url in urls:
         name = url.split('/')[-1]
-        podgen(url, f"/app/ilpost/{name}.xml")
+        podgen(url, f"ilpost/{name}.xml")
 
 if __name__ == "__main__":
     main()
