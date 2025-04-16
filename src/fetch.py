@@ -1,4 +1,4 @@
-import requests
+from requests import Session
 from bs4 import BeautifulSoup
 import json
 
@@ -13,8 +13,8 @@ headers = {
     "Connection": "keep-alive",
 }
 
-def get_data(url: str) -> dict:
-    r = requests.get(url, headers=headers)
+def get_data(url: str, session: Session = Session()) -> dict:
+    r = session.get(url, headers=headers)
     soup = BeautifulSoup(r.text, "html.parser")
     raw = soup.find("script", id="__NEXT_DATA__").string
     data = json.loads(raw)
