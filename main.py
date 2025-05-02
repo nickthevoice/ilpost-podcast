@@ -1,4 +1,4 @@
-from src.feeder import podgen
+from src import feeder
 import requests
 import random
 import time
@@ -21,8 +21,7 @@ def main() -> None:
     with requests.Session() as session:
         for url in urls:
             name = url.split('/')[-1]
-            podgen(url, f"ilpost/{name}.xml", session)
-            time.sleep(random.randint(1, 3))
-
+            feeder.podgen(url, f"ilpost/{name}.xml", session)
+            
 if __name__ == "__main__":
     main()

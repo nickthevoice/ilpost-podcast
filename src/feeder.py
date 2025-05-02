@@ -2,7 +2,7 @@ from feedgen.feed import FeedGenerator, FeedEntry
 from datetime import datetime
 from requests import Session
 import json
-from src.fetch import get_data
+from .fetch import get_data
 import logging
 
 

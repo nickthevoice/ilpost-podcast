@@ -1,6 +1,9 @@
+import time
+import random
+import json
 from requests import Session
 from bs4 import BeautifulSoup
-import json
+
 
 headers = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -14,6 +17,7 @@ headers = {
 }
 
 def get_data(url: str, session: Session = Session()) -> dict:
+    time.sleep(random.randint(1, 3))
     r = session.get(url, headers=headers)
     soup = BeautifulSoup(r.text, "html.parser")
     raw = soup.find("script", id="__NEXT_DATA__").string
