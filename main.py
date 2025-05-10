@@ -15,7 +15,8 @@ def main() -> None:
         "https://www.ilpost.it/podcasts/ascolta",
         "https://www.ilpost.it/podcasts/amare-parole",
         "https://www.ilpost.it/podcasts/ci-vuole-una-scienza",
-        "https://www.ilpost.it/podcasts/altre-indagini"
+        "https://www.ilpost.it/podcasts/altre-indagini",
+        "https://www.ilpost.it/podcasts/podcast-eurovision"
     ]
     random.shuffle(urls)
     with requests.Session() as session:
