@@ -35,7 +35,7 @@ def update_podcasts() -> None:
         "https://www.ilpost.it/podcasts/amare-parole",
         "https://www.ilpost.it/podcasts/ci-vuole-una-scienza",
         "https://www.ilpost.it/podcasts/altre-indagini",
-        "https://www.ilpost.it/podcasts/podcast-eurovision/"
+        "https://www.ilpost.it/podcasts/podcast-eurovision"
     ]
     random.shuffle(urls)
     with requests.Session() as session:
@@ -47,7 +47,7 @@ def scheduled_task() -> None:
     """A sample scheduled task executed every day at 8:30 AM."""
     while True:
         now = datetime.now()
-        next_run = now.replace(hour=8, minute=25, second=0, microsecond=0)
+        next_run = now.replace(hour=6, minute=25, second=0, microsecond=0)
         if now > next_run:
             next_run += timedelta(days=1)
         sleep_time = (next_run - now).total_seconds()
