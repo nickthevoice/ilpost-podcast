@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from fastapi.responses import PlainTextResponse
+from fastapi.responses import PlainTextResponse, HTMLResponse
 from fastapi.exceptions import HTTPException
 import os
 import threading
@@ -55,15 +55,17 @@ def scheduled_task() -> None:
         update_podcasts()
 
 @app.get("/")
-async def get_podcast_list() -> list[str]:
-    podcasts = os.listdir("ilpost/")
-    return [file for file in podcasts if file.endswith(".xml")]
+async def home() -> HTMLResponse:
+    filepath = "ilpost/home.html"
+    with open(filepath, "r") as f:
+        data = f.read()
+    return HTMLResponse(content=data)
 
 @app.get("/ilpost/{filename}")
 async def get_feed(filename: str) -> PlainTextResponse:
     """Return the content of a file from the 'ilpost' directory."""
     filepath = os.path.join("ilpost", filename)
-    if not os.path.isfile(filepath):
+    if not os.path.isfile(filepath) or not filepath.endswith(".xml"):
         raise HTTPException(status_code=404, detail="File not found")
     with open(filepath, "r") as f:
         data = f.read()
