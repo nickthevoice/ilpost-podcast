@@ -1,6 +1,7 @@
 import time
 import random
 import json
+from datetime import datetime
 from requests import Session
 from bs4 import BeautifulSoup
 
@@ -25,13 +26,19 @@ def get_data(url: str, session: Session = Session()) -> dict:
     data["props"]["pageProps"]["data"]["data"]["podcast"]["data"]["podcastUrl"] = url
     return data
 
-def main() -> None:
-    from datetime import datetime
+def get_airings_time() -> list[datetime]:
     data = get_data("https://www.ilpost.it/podcasts/morning/")
-    # print(json.dumps(data, indent=4))
     episodes = data["props"]["pageProps"]["data"]["data"]["episodes"]["data"]
-    for e in episodes:
-        print(datetime.fromtimestamp(e["timestamp"]))
+    return [datetime.fromtimestamp(episode["timestamp"]) for episode in episodes]
 
+def get_next_airing(timings: list[datetime]) -> datetime.time:
+    for t in timings:
+        print(t)
+    return max(t.time() for t in timings)
+
+def main() -> None:
+    timings = get_airings_time()
+    print(get_next_airing(timings))
+ 
 if __name__ == "__main__":
     main()

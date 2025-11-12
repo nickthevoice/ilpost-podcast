@@ -44,10 +44,10 @@ def update_podcasts() -> None:
             feeder.podgen(url, f"ilpost/{name}.xml", session)
 
 def scheduled_task() -> None:
-    """A sample scheduled task executed every day at 8:30 AM."""
+    """A sample scheduled task executed every day at 8:25 AM."""
     while True:
         now = datetime.now()
-        next_run = now.replace(hour=6, minute=25, second=0, microsecond=0)
+        next_run = now.replace(hour=8 - 1, minute=25, second=0, microsecond=0)
         if now > next_run:
             next_run += timedelta(days=1)
         sleep_time = (next_run - now).total_seconds()
