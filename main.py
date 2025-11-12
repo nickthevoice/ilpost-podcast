@@ -36,6 +36,7 @@ def update_podcasts() -> None:
         "https://www.ilpost.it/podcasts/ci-vuole-una-scienza",
         "https://www.ilpost.it/podcasts/altre-indagini",
         "https://www.ilpost.it/podcasts/podcast-eurovision"
+        "https://www.ilpost.it/podcasts/wilson"
     ]
     random.shuffle(urls)
     with requests.Session() as session:
