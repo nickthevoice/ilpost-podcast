@@ -11,6 +11,18 @@ import requests
 import random
 
 
+headers = {
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    # "Accept-Encoding": "gzip, deflate, br",
+    "Accept-Language": "it-IT,it;q=0.9",
+    "Connection": "keep-alive",
+    "Sec-Fetch-Dest": "document",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-Site": "same-origin",
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15",
+}
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup
@@ -27,25 +39,21 @@ def update_podcasts() -> None:
     delay = random.randint(5, 30)
     print(f"Waiting for {delay} seconds")
     time.sleep(delay)
-    urls = [
-        "https://www.ilpost.it/podcasts/morning",
-        "https://www.ilpost.it/podcasts/globo",
-        "https://www.ilpost.it/podcasts/tienimi-bordone",
-        "https://www.ilpost.it/podcasts/ascolta",
-        "https://www.ilpost.it/podcasts/amare-parole",
-        "https://www.ilpost.it/podcasts/ci-vuole-una-scienza",
-        "https://www.ilpost.it/podcasts/altre-indagini",
-        "https://www.ilpost.it/podcasts/podcast-eurovision"
-        "https://www.ilpost.it/podcasts/wilson"
+    endpoints = [
+        "morning", "globo", "tienimi-bordone",
+        "ascolta", "amare-parole", "ci-vuole-una-scienza",
+        "altre-indagini", "podcast-eurovision", "wilson"
     ]
-    random.shuffle(urls)
+    random.shuffle(endpoints)
     with requests.Session() as session:
-        for url in urls:
-            name = url.split('/')[-1]
-            feeder.podgen(url, f"ilpost/{name}.xml", session)
+        session.headers = headers
+        for endpoint in endpoints:
+            url = "https://www.ilpost.it/podcasts/" + endpoint
+            feeder.podgen(url, f"ilpost/{endpoint}.xml", session)
 
 def scheduled_task() -> None:
     """A sample scheduled task executed every day at 8:25 AM."""
+    update_podcasts()
     while True:
         now = datetime.now()
         next_run = now.replace(hour=8 - 1, minute=25, second=0, microsecond=0)
